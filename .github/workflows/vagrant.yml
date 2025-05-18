@@ -21,6 +21,7 @@ on:
 permissions: {} # none
 
 jobs:
+  if: false
   build:
     permissions:
       contents: read
