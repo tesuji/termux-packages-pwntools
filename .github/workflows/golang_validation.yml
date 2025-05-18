@@ -1,4 +1,5 @@
 name: Golang validation
+disabled: true
 
 on:
   workflow_dispatch:
@@ -8,7 +9,6 @@ on:
     - 'scripts/build/setup/termux_setup_golang.sh'
 
 jobs:
-  if: false
   golang_validation:
     runs-on: ubuntu-latest
     strategy:

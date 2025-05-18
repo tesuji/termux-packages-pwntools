@@ -1,4 +1,5 @@
 name: Packages
+disabled: true
 
 on:
   push:
@@ -30,7 +31,6 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  if: false
   build:
     permissions:
       contents: read # actions/upload-artifact doesn't need contents: write

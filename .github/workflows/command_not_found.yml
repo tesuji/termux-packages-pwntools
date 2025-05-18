@@ -1,4 +1,5 @@
 name: Command Not Found Rebuild
+disabled: true
 
 on:
   schedule:
@@ -8,7 +9,6 @@ on:
 permissions: {} # none
 
 jobs:
-  if: false
   rebuild-command-not-found:
     permissions:
       issues: write
