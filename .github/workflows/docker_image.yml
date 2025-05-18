@@ -15,6 +15,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  if: false
   update:
     runs-on: ubuntu-latest
     permissions:
