@@ -1,3 +1,47 @@
+This is a fork to build python native modules to make installing
+pwntools (via pip) on termux possible.
+
+### Why a fork?
+* termux has a package policy that it doesn't accept hacking packages.
+
+### Installation instructions
+
+```bash
+pkg install python-bcrypt unicorn capstone sodium zstd
+SODIUM_INSTALL=system pip install pynacl
+# download my pre-built packages or build it yourself
+# https://github.com/tesuji/termux-packages-pwntools/releases/tag/2025-05-18
+dpkg -i python-capstone*.deb
+dpkg -i python-unicorn*.deb
+dpkg -i python-zstandard*.deb
+pip install pwntools unicorn==2.1.3
+```
+
+How to build python native modules:
+```bash
+# clone this repository
+git clone --depth 1 https://github.com/tesuji/termux-packages-pwntools
+cd termux-packages-pwntools
+./scripts/run-docker.sh
+./build-package.sh -I python-capstone python-unicorn python-zstandard
+# *.deb files are stored in output/ dir
+# copy them to your phone and use dpkg to install them
+```
+
+NOTE:
+* I haven't done any tests to ensure that pwntools behaviors
+  are correct on termux.
+* There is only pre-built packages for aarch64 ELF.
+* Use at your own risks.
+
+TODO:
+* Use github actions to generate missing `\*.deb` files
+* Resolve potential unicorn version conflict
+
+---
+
+*original readme below*
+
 # Termux packages
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/termux/termux-packages)
