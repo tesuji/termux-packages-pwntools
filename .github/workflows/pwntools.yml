@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pwntools-deps-${{ matrix.arch }}-${{ github.sha }}
-          path: "*.zip"
+          path: "output/*.deb"
   publish:
     permissions:
       contents: write # for git push
@@ -45,6 +45,8 @@ jobs:
         with:
           merge-multiple: true
           path: ./
+      - name: ls
+        run: ls -l
       - name: Create new tag
         id: get_tag
         run: |
@@ -60,11 +62,10 @@ jobs:
           git push --tags
           echo "tag_name=$new_tag" >> $GITHUB_OUTPUT
       - name: Publish bootstrap zips to GitHub release
-        uses: termux/upload-release-action@v4.2.0
+        uses: alexellis/upload-assets@0.4.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: "*.zip"
-          file_glob: true
-          release_name: "Dependencies archives for `pip pwntools` for Termux application (apt.android-7)"
-          tag: ${{ steps.get_tag.outputs.tag_name }}
-          checksums: sha256,sha512,md5
+          asset_paths: '["./*.deb"]'
+          #release_name: "Dependencies archives for `pip pwntools` for Termux application (apt.android-7)"
+          #tag: ${{ steps.get_tag.outputs.tag_name }}
