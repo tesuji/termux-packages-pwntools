@@ -1,4 +1,5 @@
 name: Generate bootstrap archives (android-7)
+disabled: true
 
 on:
   schedule:
@@ -12,7 +13,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  if: false
   build:
     permissions:
       contents: read # actions/upload-artifact doesn't need contents: write
